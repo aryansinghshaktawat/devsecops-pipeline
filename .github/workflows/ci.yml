@@ -51,6 +51,17 @@ jobs:
         run: |
           bandit -r src/ -f json -o bandit-report.json || true
       
+      - name: Check for HIGH severity issues
+        run: |
+          if [ -f bandit-report.json ]; then
+            HIGH_COUNT=$(cat bandit-report.json | python -c "import sys, json; data=json.load(sys.stdin); print(sum(1 for r in data.get('results', []) if r.get('issue_severity') == 'HIGH'))")
+            echo "Found $HIGH_COUNT HIGH severity issues"
+            if [ "$HIGH_COUNT" -gt "0" ]; then
+              echo "❌ POLICY VIOLATION: HIGH severity security issues detected!"
+              exit 1
+            fi
+          fi
+      
       - name: Upload Bandit report
         uses: actions/upload-artifact@v3
         with:
@@ -77,6 +88,17 @@ jobs:
       - name: Run Gitleaks scan
         run: |
           gitleaks detect --source . --report-format json --report-path gitleaks-report.json || true
+      
+      - name: Check for secrets
+        run: |
+          if [ -f gitleaks-report.json ]; then
+            SECRET_COUNT=$(cat gitleaks-report.json | python -c "import sys, json; data=json.load(sys.stdin); print(len(data) if isinstance(data, list) else 0)")
+            echo "Found $SECRET_COUNT potential secrets"
+            if [ "$SECRET_COUNT" -gt "0" ]; then
+              echo "❌ POLICY VIOLATION: Secrets detected in code!"
+              exit 1
+            fi
+          fi
       
       - name: Upload Gitleaks report
         uses: actions/upload-artifact@v3
@@ -109,6 +131,18 @@ jobs:
       - name: Run pip-audit
         run: |
           pip-audit --format json --output pip-audit.json || true
+      
+      - name: Check for critical vulnerabilities
+        run: |
+          if [ -f pip-audit.json ]; then
+            VULN_COUNT=$(cat pip-audit.json | python -c "import sys, json; data=json.load(sys.stdin); print(sum(len(d.get('vulns', [])) for d in data.get('dependencies', [])))")
+            echo "Found $VULN_COUNT vulnerabilities"
+            if [ "$VULN_COUNT" -gt "0" ]; then
+              echo "⚠️  WARNING: Vulnerable dependencies detected!"
+              # Uncomment to fail on any vulnerability:
+              # exit 1
+            fi
+          fi
       
       - name: Upload pip-audit report
         uses: actions/upload-artifact@v3
