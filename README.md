@@ -1,8 +1,19 @@
 # DevSecOps CI Pipeline
 
 [![DevSecOps CI Pipeline](https://github.com/aryansinghshaktawat/devsecops-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/aryansinghshaktawat/devsecops-pipeline/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
+[![Code style: PEP8](https://img.shields.io/badge/code%20style-PEP8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
 
 A comprehensive DevSecOps pipeline demonstrating automated security scanning, SBOM generation, and policy enforcement using GitHub Actions.
+
+## 📚 Documentation
+
+- [Contributing Guide](CONTRIBUTING.md) - How to contribute to this project
+- [Security Policy](SECURITY.md) - Security vulnerability reporting
+- [Code of Conduct](CODE_OF_CONDUCT.md) - Community guidelines
+- [Development Guide](DEVELOPMENT.md) - Setup and development instructions
+- [Changelog](CHANGELOG.md) - Version history and changes
 
 ## Overview
 
@@ -289,7 +300,28 @@ updates:
 5. **Run Locally**: Test security scans before pushing to catch issues early
 6. **Monitor SBOM**: Regularly review your SBOM for supply chain risks
 
-## Troubleshooting
+## 🤝 Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details on:
+- How to report bugs
+- How to suggest enhancements
+- Development setup
+- Code style guidelines
+- Pull request process
+
+Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
+
+## 🔒 Security
+
+Security is a top priority for this project. If you discover a security vulnerability:
+
+- **DO NOT** create a public GitHub issue
+- Report it privately via [GitHub Security Advisories](https://github.com/aryansinghshaktawat/devsecops-pipeline/security/advisories)
+- Or email: aryansinghshaktawat@example.com
+
+See our [Security Policy](SECURITY.md) for more details.
+
+## 📋 Troubleshooting
 
 ### Pipeline Fails on Bandit Check
 - Review `bandit-report.json` artifact
@@ -305,17 +337,32 @@ updates:
 - Check for available patches or workarounds
 - Document accepted risks if no fix is available
 
-## Contributing
+For more troubleshooting help, see [DEVELOPMENT.md](DEVELOPMENT.md).
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Ensure all security scans pass
-5. Submit a pull request
+## 📝 License
 
-## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-This project is provided as-is for educational and demonstration purposes.
+## 🙏 Acknowledgments
+
+- [Bandit](https://bandit.readthedocs.io/) - Python security linter
+- [Gitleaks](https://github.com/gitleaks/gitleaks) - Secret scanning tool
+- [pip-audit](https://github.com/pypa/pip-audit) - Dependency vulnerability scanner
+- [CycloneDX](https://cyclonedx.org/) - SBOM standard and tools
+- [GitHub Actions](https://github.com/features/actions) - CI/CD platform
+
+## 📬 Contact
+
+- GitHub: [@aryansinghshaktawat](https://github.com/aryansinghshaktawat)
+- Email: aryansinghshaktawat@example.com
+
+## ⭐ Show Your Support
+
+If you find this project helpful, please consider giving it a star on GitHub!
+
+---
+
+**Note**: This is a demonstration project for educational purposes. For production use, additional security measures and hardening are recommended.
 
 ## Resources
 
