@@ -147,3 +147,44 @@ jobs:
         with:
           name: sbom
           path: sbom.json
+  
+  aggregate-reports:
+    name: Aggregate Security Reports
+    runs-on: ubuntu-latest
+    needs: [security-sast, secret-scanning, dependency-scan, sbom-generation]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Download all reports
+        uses: actions/download-artifact@v3
+        with:
+          path: ./reports
+      
+      - name: Move reports to root
+        run: |
+          mv reports/bandit-report/bandit-report.json . || touch bandit-report.json
+          mv reports/gitleaks-report/gitleaks-report.json . || touch gitleaks-report.json
+          mv reports/pip-audit-report/pip-audit.json . || touch pip-audit.json
+          mv reports/sbom/sbom.json . || touch sbom.json
+      
+      - name: Run report aggregation
+        run: |
+          python tools/merge_reports.py
+      
+      - name: Upload security summary
+        uses: actions/upload-artifact@v3
+        with:
+          name: security-summary
+          path: security-summary.json
+      
+      - name: Display summary
+        run: |
+          echo "📊 Security Summary:"
+          cat security-summary.json | python -m json.tool
