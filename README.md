@@ -9,10 +9,11 @@ A comprehensive DevSecOps pipeline demonstrating automated security scanning, SB
 
 ## 📚 Documentation
 
+- **[Usage Guide](USAGE.md)** - **START HERE!** Complete guide on how to use this project
+- [Development Guide](DEVELOPMENT.md) - Setup and development instructions
 - [Contributing Guide](CONTRIBUTING.md) - How to contribute to this project
 - [Security Policy](SECURITY.md) - Security vulnerability reporting
 - [Code of Conduct](CODE_OF_CONDUCT.md) - Community guidelines
-- [Development Guide](DEVELOPMENT.md) - Setup and development instructions
 - [Changelog](CHANGELOG.md) - Version history and changes
 
 ## Overview
