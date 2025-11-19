@@ -27,7 +27,7 @@ classifiers = [
 keywords = ["devsecops", "security", "ci-cd", "sast", "sbom", "pipeline", "github-actions"]
 requires-python = ">=3.9"
 dependencies = [
-    "flask>=2.3.0,<3.0.0",
+    "flask>=2.3.0,<4.0.0",
     "requests>=2.31.0",
 ]
 
