@@ -1,5 +1,7 @@
 # DevSecOps CI Pipeline
 
+[![DevSecOps CI Pipeline](https://github.com/aryansinghshaktawat/devsecops-pipeline/actions/workflows/ci.yml/badge.svg)](https://github.com/aryansinghshaktawat/devsecops-pipeline/actions/workflows/ci.yml)
+
 A comprehensive DevSecOps pipeline demonstrating automated security scanning, SBOM generation, and policy enforcement using GitHub Actions.
 
 ## Overview
