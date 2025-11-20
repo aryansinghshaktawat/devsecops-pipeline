@@ -54,20 +54,36 @@ jobs:
       - name: Run Bandit scan on src only
         run: |
           bandit -r src/ -f json -o bandit-report.json -ll || true
-          cat bandit-report.json
+          if [ -f bandit-report.json ]; then
+            echo "Bandit report generated:"
+            cat bandit-report.json | head -50
+          fi
       
       - name: Check for HIGH severity issues
         run: |
+          HIGH_COUNT=0
           if [ -f bandit-report.json ]; then
-            HIGH_COUNT=$(python -c "import sys, json; data=json.load(open('bandit-report.json')); print(sum(1 for r in data.get('results', []) if r.get('issue_severity') == 'HIGH'))" 2>/dev/null || echo "0")
+            HIGH_COUNT=$(python3 -c "
+import json
+try:
+    with open('bandit-report.json') as f:
+        data = json.load(f)
+        count = sum(1 for r in data.get('results', []) if r.get('issue_severity') == 'HIGH')
+        print(count)
+except Exception as e:
+    print('0')
+    print(f'Error: {e}', file=__import__('sys').stderr)
+" 2>&1 | head -1)
             echo "Found $HIGH_COUNT HIGH severity issues"
             if [ "$HIGH_COUNT" -gt "0" ]; then
               echo "❌ POLICY VIOLATION: HIGH severity security issues detected!"
-              python -c "import json; [print(f\"  - {r['filename']}:{r['line_number']} - {r['issue_text']}\") for r in json.load(open('bandit-report.json')).get('results', []) if r.get('issue_severity') == 'HIGH']"
+              python3 -c "import json; [print(f\"  - {r['filename']}:{r['line_number']} - {r['issue_text']}\") for r in json.load(open('bandit-report.json')).get('results', []) if r.get('issue_severity') == 'HIGH']"
               exit 1
             else
               echo "✅ No HIGH severity issues found"
             fi
+          else
+            echo "⚠️  No Bandit report found"
           fi
       
       - name: Upload Bandit report
