@@ -14,7 +14,7 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -38,7 +38,7 @@ jobs:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -100,7 +100,7 @@ except Exception as e:
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
       
@@ -167,7 +167,7 @@ EOF
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -215,7 +215,7 @@ EOF
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -252,7 +252,7 @@ EOF
     
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       
       - name: Set up Python
         uses: actions/setup-python@v5
