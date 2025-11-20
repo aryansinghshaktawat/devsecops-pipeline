@@ -21,10 +21,10 @@ echo "${RED}══════════════════════�
 echo "${RED}🚨 Demo 1: Scanning INSECURE Code with Bandit${NC}"
 echo "${RED}═══════════════════════════════════════════════════════════════${NC}"
 echo ""
-echo "File: src/demo_insecure.py"
+echo "File: demos/demo_insecure.py"
 echo "Expected: Multiple HIGH severity vulnerabilities"
 echo ""
-bandit -r src/demo_insecure.py -ll
+bandit -r demos/demo_insecure.py -ll
 echo ""
 read -p "Press Enter to continue..."
 
@@ -34,10 +34,10 @@ echo "${GREEN}══════════════════════
 echo "${GREEN}✅ Demo 2: Scanning SECURE Code with Bandit${NC}"
 echo "${GREEN}═══════════════════════════════════════════════════════════════${NC}"
 echo ""
-echo "File: src/demo_secure.py"
+echo "File: demos/demo_secure.py"
 echo "Expected: No HIGH severity issues"
 echo ""
-bandit -r src/demo_secure.py -ll
+bandit -r demos/demo_secure.py -ll
 echo ""
 read -p "Press Enter to continue..."
 
