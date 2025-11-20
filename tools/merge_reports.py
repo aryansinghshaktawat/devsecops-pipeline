@@ -14,7 +14,13 @@ def load_json_report(file_path):
     try:
         if os.path.exists(file_path):
             with open(file_path, 'r') as f:
-                return json.load(f)
+                content = f.read().strip()
+                if not content:
+                    print(f"Warning: {file_path} is empty")
+                    return None
+                return json.loads(content)
+        else:
+            print(f"Warning: {file_path} not found")
     except json.JSONDecodeError as e:
         print(f"Warning: Failed to parse {file_path}: {e}")
     except Exception as e:
