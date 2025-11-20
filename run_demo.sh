@@ -86,7 +86,7 @@ echo ""
 echo "Installing CycloneDX..."
 pip install cyclonedx-bom > /dev/null 2>&1
 echo "Generating SBOM..."
-cyclonedx-py -r --format json -o sbom.json
+cyclonedx-py requirements requirements.txt --output-format JSON --output-file sbom.json
 if [ -f sbom.json ]; then
     echo ""
     echo "${GREEN}✅ SBOM generated successfully!${NC}"

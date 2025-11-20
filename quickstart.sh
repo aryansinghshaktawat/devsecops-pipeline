@@ -66,7 +66,7 @@ echo ""
 
 # Generate SBOM
 echo "📋 Generating SBOM..."
-cyclonedx-py -r --format json -o sbom.json
+cyclonedx-py requirements requirements.txt --output-format JSON --output-file sbom.json
 echo "✅ SBOM generated: sbom.json"
 echo ""
 
