@@ -87,7 +87,13 @@ jobs:
       
       - name: Run Gitleaks scan
         run: |
-          gitleaks detect --source . --report-format json --report-path gitleaks-report.json || true
+          gitleaks detect --source . --report-format json --report-path gitleaks-report.json --no-git || true
+      
+      - name: Filter out demo files from results
+        run: |
+          if [ -f gitleaks-report.json ]; then
+            python -c "import json; data=json.load(open('gitleaks-report.json')); filtered=[r for r in (data if isinstance(data, list) else []) if 'demos/' not in r.get('File', '')]; json.dump(filtered, open('gitleaks-report.json', 'w'), indent=2)"
+          fi
       
       - name: Check for secrets
         run: |

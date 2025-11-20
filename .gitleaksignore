@@ -1,0 +1,4 @@
+# Ignore demo files with intentional vulnerabilities for educational purposes
+demos/demo_insecure.py
+demos/demo_secure.py
+demos/**
